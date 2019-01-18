@@ -52,6 +52,21 @@ SOFTWARE.
 <body>
     <div id="content">
         <iframe id="app" width="100%" height="100%" frameborder="0" src="https://frontend-chinodesuuu-stage.8a09.starter-us-east-2.openshiftapps.com" />
+        <script>
+            iframe.onload = function () {
+                console.log("IFrame has loaded.");
+
+                if (window.location.pathname !== "/") {
+                    console.log("parent frame changed path, setting path for IFrame to" + window.location.pathname);
+                    iframe.window.location = window.location.pathname;
+                }
+
+                if (iframe.window.location !== "/") {
+                    console.log("child frame changed path, setting path for Parent to" + iframe.window.location);
+                    window.location.pathname = iframe.window.location;
+                }
+            }
+        </script>
     </div>
 </body>
 </html>
